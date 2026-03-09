@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure SDE Learning Tracker - Python Edition</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">🐍 Pure SDE Journey</h1>
+                <div class="header-stats">
+                    <div class="stat-card">
+                        <span class="stat-value" id="totalProgress">0%</span>
+                        <span class="stat-label">Overall Progress</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="problemsSolved">0/450</span>
+                        <span class="stat-label">Problems Solved</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="currentStreak">0</span>
+                        <span class="stat-label">Day Streak</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li class="nav-item active" data-phase="overview">Overview</li>
+                <li class="nav-item" data-phase="phase1">Phase 1 (M1-3)</li>
+                <li class="nav-item" data-phase="phase2">Phase 2 (M4-6)</li>
+                <li class="nav-item" data-phase="phase3">Phase 3 (M7-9)</li>
+                <li class="nav-item" data-phase="bonus">Bonus (M10-12)</li>
+                <li class="nav-item" data-phase="resources">Resources</li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            
+            <!-- Overview Section -->
+            <section id="overview" class="phase-section active">
+                <h2 class="section-title">🎯 Your 12-Month Journey to Pure SDE</h2>
+                
+                <!-- Timeline Overview -->
+                <div class="timeline-overview">
+                    <div class="timeline-card" data-month="1-3">
+                        <div class="timeline-header">
+                            <span class="timeline-icon">📚</span>
+                            <h3>Phase 1: Foundation</h3>
+                            <span class="timeline-duration">Months 1-3</span>
+                        </div>
+                        <p>Python Mastery + DSA Fundamentals (Arrays, Trees, Graphs, Heaps)</p>
+                        <div class="timeline-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%" data-phase-progress="phase1"></div>
+                            </div>
+                            <span class="progress-text">0/140 problems</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-card" data-month="4-6">
+                        <div class="timeline-header">
+                            <span class="timeline-icon">🚀</span>
+                            <h3>Phase 2: Advanced DSA</h3>
+                            <span class="timeline-duration">Months 4-6</span>
+                        </div>
+                        <p>Dynamic Programming, Greedy, Backtracking, System Design Intro</p>
+                        <div class="timeline-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%" data-phase-progress="phase2"></div>
+                            </div>
+                            <span class="progress-text">0/120 problems</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-card" data-month="7-9">
+                        <div class="timeline-header">
+                            <span class="timeline-icon">💪</span>
+                            <h3>Phase 3: Mastery</h3>
+                            <span class="timeline-duration">Months 7-9</span>
+                        </div>
+                        <p>Intensive Problem Solving, Mock Interviews, System Design Deep Dive</p>
+                        <div class="timeline-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%" data-phase-progress="phase3"></div>
+                            </div>
+                            <span class="progress-text">0/190 problems</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-card" data-month="10-12">
+                        <div class="timeline-header">
+                            <span class="timeline-icon">⭐</span>
+                            <h3>Bonus: Specialization</h3>
+                            <span class="timeline-duration">Months 10-12</span>
+                        </div>
+                        <p>Backend Frameworks (FastAPI/Django), Distributed Systems</p>
+                        <div class="timeline-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%" data-phase-progress="bonus"></div>
+                            </div>
+                            <span class="progress-text">0/6 projects</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats Dashboard -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>📊 Current Focus</h3>
+                        <div class="focus-content">
+                            <p id="currentFocus">Week 1: Python Deep Dive</p>
+                            <button class="btn-secondary" onclick="updateFocus()">Update</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>🎯 Today's Goals</h3>
+                        <div class="goals-list" id="dailyGoals">
+                            <div class="goal-item">
+                                <input type="checkbox" id="goal1" onchange="saveProgress()">
+                                <label for="goal1">Solve 2 LeetCode problems</label>
+                            </div>
+                            <div class="goal-item">
+                                <input type="checkbox" id="goal2" onchange="saveProgress()">
+                                <label for="goal2">Study Python decorators</label>
+                            </div>
+                            <div class="goal-item">
+                                <input type="checkbox" id="goal3" onchange="saveProgress()">
+                                <label for="goal3">Review yesterday's solutions</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>📈 Weekly Summary</h3>
+                        <div class="weekly-summary">
+                            <div class="summary-item">
+                                <span>Problems Solved:</span>
+                                <strong id="weeklyProblems">0</strong>
+                            </div>
+                            <div class="summary-item">
+                                <span>Study Hours:</span>
+                                <strong id="weeklyHours">0h</strong>
+                            </div>
+                            <div class="summary-item">
+                                <span>Concepts Learned:</span>
+                                <strong id="weeklyConcepts">0</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>🏆 Achievements</h3>
+                        <div class="achievements">
+                            <div class="badge locked" data-badge="first-solve">
+                                <span class="badge-icon">🎉</span>
+                                <span class="badge-name">First Solve</span>
+                            </div>
+                            <div class="badge locked" data-badge="week-streak">
+                                <span class="badge-icon">🔥</span>
+                                <span class="badge-name">Week Streak</span>
+                            </div>
+                            <div class="badge locked" data-badge="century">
+                                <span class="badge-icon">💯</span>
+                                <span class="badge-name">100 Problems</span>
+                            </div>
+                            <div class="badge locked" data-badge="phase1-complete">
+                                <span class="badge-icon">✅</span>
+                                <span class="badge-name">Phase 1 Done</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 1 Section (Months 1-3) -->
+            <section id="phase1" class="phase-section">
+                <h2 class="section-title">📚 Phase 1: Python Mastery & DSA Foundation (Months 1-3)</h2>
+                
+                <!-- Month 1 -->
+                <div class="month-section">
+                    <div class="month-header">
+                        <h3>Month 1: Advanced Python + Arrays/Strings</h3>
+                        <span class="month-progress">0/50 problems</span>
+                    </div>
+
+                    <!-- Week 1-2 -->
+                    <div class="week-card">
+                        <div class="week-header" onclick="toggleWeek(this)">
+                            <div class="week-title">
+                                <span class="week-icon">📖</span>
+                                <h4>Week 1-2: Python Deep Dive</h4>
+                            </div>
+                            <div class="week-meta">
+                                <span class="week-duration">14 days</span>
+                                <span class="week-status">Not Started</span>
+                                <span class="toggle-icon">▼</span>
+                            </div>
+                        </div>
+                        <div class="week-content">
+                            <div class="topics-section">
+                                <h5>Topics to Master:</h5>
+                                <div class="topics-grid">
+                                    <div class="topic-item">
+                                        <input type="checkbox" id="m1w1-decorators" onchange="saveProgress()">
+                                        <label for="m1w1-decorators">
+                                            <strong>Decorators</strong>
+                                            <span>Function & class decorators, @property, @staticmethod</span>
+                                        </label>
+                                    </div>
+                                    <div class="topic-item">
+                                        <input type="checkbox" id="m1w1-generators" onchange="saveProgress()">
+                                        <label for="m1w1-generators">
+                                            <strong>Generators & Iterators</strong>
+                                            <span>yield, iterator protocol, itertools module</span>
+                                        </label>
+                                    </div>
+                                    <div class="topic-item">
+                                        <input type="checkbox" id="m1w1-context" onchange="saveProgress()">
+                                        <label for="m1w1-context">
+                                            <strong>Context Managers</strong>
+                                            <span>with statement, __enter__/__exit__, contextlib</span>
+                                        </label>
+                                    </div>
+                                    <div class="topic-item">
+                                        <input type="checkbox" id="m1w1-oop" onchange="saveProgress()">
+                                        <label for="m1w1-oop">
+                                            <strong>Advanced OOP</strong>
+                                            <span>MRO, ABC, dataclasses, dunder methods</span>
+                                        </label>
+                                    </div>
+                                    <div class="topic-item">
+                                        <input type="checkbox" id="m1w1-typehints" onchange="saveProgress()">
+                                        <label for="m1w1-typehints">
+                                            <strong>Type Hints</strong>
+                                            <span>Type annotations, Optional, Union, mypy</span>
+                                        </label>
+                                    </div>
+                                    <div class="topic-item">
+                                        <input type="checkbox" id="m1w1-functional" onchange="saveProgress()">
+                                        <label for="m1w1-functional">
+                                            <strong>Functional Programming</strong>
+                                            <span>Lambda, map/filter/reduce, comprehensions</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="daily-schedule">
+                                <h5>Daily Schedule:</h5>
+                                <div class="schedule-timeline">
+                                    <div class="schedule-day">
+                                        <strong>Day 1-2:</strong>
+                                        <span>Decorators + Context Managers (write 5 custom decorators)</span>
+                                    </div>
+                                    <div class="schedule-day">
+                                        <strong>Day 3-4:</strong>
+                                        <span>Generators + Itertools (solve 10 problems)</span>
+                                    </div>
+                                    <div class="schedule-day">
+                                        <strong>Day 5-6:</strong>
+                                        <span>Advanced OOP (implement 3 design patterns)</span>
+                                    </div>
+                                    <div class="schedule-day">
+                                        <strong>Day 7:</strong>
+                                        <span>Review + Build mini project (custom logging decorator)</span>
+                                    </div>
+                                    <div class="schedule-day">
+                                        <strong>Day 8-9:</strong>
+                                        <span>Type hints (add types to previous projects)</span>
+                                    </div>
+                                    <div class="schedule-day">
+                                        <strong>Day 10-11:</strong>
+                                        <span>Collections module (defaultdict, Counter, deque)</span>
+                                    </div>
+                                    <div class="schedule-day">
+                                        <strong>Day 12-13:</strong>
+                                        <span>Functional programming (15 problems using map/filter/reduce)</span>
+                                    </div>
+                                    <div class="schedule-day">
+                                        <strong>Day 14:</strong>
+                                        <span>Review + Assessment</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="resources-section">
+                                <h5>Resources:</h5>
+                                <ul class="resources-list">
+                                    <li>📘 Book: "Fluent Python" by Luciano Ramalho (Chapters 1-7)</li>
+                                    <li>🎥 Course: "Python Beyond the Basics" (Pluralsight)</li>
+                                    <li>💻 Practice: Python Morsels exercises</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 3-4 -->
+                    <div class="week-card">
+                        <div class="week-header" onclick="toggleWeek(this)">
+                            <div class="week-title">
+                                <span class="week-icon">💻</span>
+                                <h4>Week 3-4: Arrays & Strings DSA</h4>
+                            </div>
+                            <div class="week-meta">
+                                <span class="week-duration">14 days</span>
+                                <span class="problem-count">50 problems</span>
+                                <span class="toggle-icon">▼</span>
+                            </div>
+                        </div>
+                        <div class="week-content">
+                            <div class="topics-section">
+                                <h5>LeetCode Problem Categories:</h5>
+                                <div class="problem-categories">
+                                    <div class="category-card">
+                                        <div class="category-header">
+                                            <h6>Two Pointers (8 problems)</h6>
+                                            <span class="category-progress">0/8</span>
+                                        </div>
+                                        <div class="problems-list">
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-twosum2" onchange="saveProgress()">
+                                                <label for="prob-twosum2">Two Sum II (Sorted Array)</label>
+                                                <span class="difficulty easy">Easy</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-3sum" onchange="saveProgress()">
+                                                <label for="prob-3sum">3Sum</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-container" onchange="saveProgress()">
+                                                <label for="prob-container">Container With Most Water</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-removedup" onchange="saveProgress()">
+                                                <label for="prob-removedup">Remove Duplicates from Sorted Array</label>
+                                                <span class="difficulty easy">Easy</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-movezeros" onchange="saveProgress()">
+                                                <label for="prob-movezeros">Move Zeroes</label>
+                                                <span class="difficulty easy">Easy</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-sortcolors" onchange="saveProgress()">
+                                                <label for="prob-sortcolors">Sort Colors</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-validpalindrome" onchange="saveProgress()">
+                                                <label for="prob-validpalindrome">Valid Palindrome</label>
+                                                <span class="difficulty easy">Easy</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-trappingwater" onchange="saveProgress()">
+                                                <label for="prob-trappingwater">Trapping Rain Water</label>
+                                                <span class="difficulty hard">Hard</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="category-card">
+                                        <div class="category-header">
+                                            <h6>Sliding Window (8 problems)</h6>
+                                            <span class="category-progress">0/8</span>
+                                        </div>
+                                        <div class="problems-list">
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-maxsubarray" onchange="saveProgress()">
+                                                <label for="prob-maxsubarray">Maximum Subarray</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-longestsubstring" onchange="saveProgress()">
+                                                <label for="prob-longestsubstring">Longest Substring Without Repeating Characters</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-minwindow" onchange="saveProgress()">
+                                                <label for="prob-minwindow">Minimum Window Substring</label>
+                                                <span class="difficulty hard">Hard</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-slidingmax" onchange="saveProgress()">
+                                                <label for="prob-slidingmax">Sliding Window Maximum</label>
+                                                <span class="difficulty hard">Hard</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-permutation" onchange="saveProgress()">
+                                                <label for="prob-permutation">Permutation in String</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-findanagrams" onchange="saveProgress()">
+                                                <label for="prob-findanagrams">Find All Anagrams in a String</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-longestk" onchange="saveProgress()">
+                                                <label for="prob-longestk">Longest Repeating Character Replacement</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-characterreplacement" onchange="saveProgress()">
+                                                <label for="prob-characterreplacement">Longest Substring with At Most K Distinct Characters</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="category-card">
+                                        <div class="category-header">
+                                            <h6>String Manipulation (10 problems)</h6>
+                                            <span class="category-progress">0/10</span>
+                                        </div>
+                                        <div class="problems-list">
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-reversestring" onchange="saveProgress()">
+                                                <label for="prob-reversestring">Reverse String</label>
+                                                <span class="difficulty easy">Easy</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-validanagram" onchange="saveProgress()">
+                                                <label for="prob-validanagram">Valid Anagram</label>
+                                                <span class="difficulty easy">Easy</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-groupanagrams" onchange="saveProgress()">
+                                                <label for="prob-groupanagrams">Group Anagrams</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-longestpalindrome" onchange="saveProgress()">
+                                                <label for="prob-longestpalindrome">Longest Palindromic Substring</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-implementstrstr" onchange="saveProgress()">
+                                                <label for="prob-implementstrstr">Implement strStr()</label>
+                                                <span class="difficulty easy">Easy</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-longestcommon" onchange="saveProgress()">
+                                                <label for="prob-longestcommon">Longest Common Prefix</label>
+                                                <span class="difficulty easy">Easy</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-stringtoint" onchange="saveProgress()">
+                                                <label for="prob-stringtoint">String to Integer (atoi)</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-palindromesubstrings" onchange="saveProgress()">
+                                                <label for="prob-palindromesubstrings">Palindromic Substrings</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-encodestring" onchange="saveProgress()">
+                                                <label for="prob-encodestring">Encode and Decode Strings</label>
+                                                <span class="difficulty medium">Medium</span>
+                                            </div>
+                                            <div class="problem-item">
+                                                <input type="checkbox" id="prob-issubsequence" onchange="saveProgress()">
+                                                <label for="prob-issubsequence">Is Subsequence</label>
+                                                <span class="difficulty easy">Easy</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="code-examples">
+                                <h5>Python Implementation Patterns:</h5>
+                                <div class="code-snippet">
+                                    <pre><code># Two Pointers Pattern
+def two_sum_sorted(arr, target):
+    left, right = 0, len(arr) - 1
+    while left < right:
+        current_sum = arr[left] + arr[right]
+        if current_sum == target:
+            return [left, right]
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1</code></pre>
+                                </div>
+                                <div class="code-snippet">
+                                    <pre><code># Sliding Window Pattern
+def max_subarray_sum(arr, k):
+    window_sum = sum(arr[:k])
+    max_sum = window_sum
+    
+    for i in range(k, len(arr)):
+        window_sum = window_sum - arr[i-k] + arr[i]
+        max_sum = max(max_sum, window_sum)
+    
+    return max_sum</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="resources-section">
+                                <h5>Resources:</h5>
+                                <ul class="resources-list">
+                                    <li>📘 NeetCode 150: Arrays & Strings section</li>
+                                    <li>📘 LeetCode: Explore Cards - Arrays 101, Strings</li>
+                                    <li>📕 Book: "Grokking Algorithms" (Chapter 1-2)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Month 2 Placeholder -->
+                <div class="month-section">
+                    <div class="month-header">
+                        <h3>Month 2: Fundamental Data Structures</h3>
+                        <span class="month-progress">0/60 problems</span>
+                    </div>
+                    <p class="month-description">Linked Lists (15), Stacks & Queues (15), Trees (30)</p>
+                    <button class="btn-expand" onclick="alert('Detailed breakdown available - expand to see all weeks!')">Expand Month 2 Details</button>
+                </div>
+
+                <!-- Month 3 Placeholder -->
+                <div class="month-section">
+                    <div class="month-header">
+                        <h3>Month 3: Graphs & Heaps</h3>
+                        <span class="month-progress">0/40 problems</span>
+                    </div>
+                    <p class="month-description">Graph Algorithms (25), Heaps & Priority Queues (15)</p>
+                    <button class="btn-expand" onclick="alert('Detailed breakdown available - expand to see all weeks!')">Expand Month 3 Details</button>
+                </div>
+            </section>
+
+            <!-- Phase 2 Section (Months 4-6) -->
+            <section id="phase2" class="phase-section">
+                <h2 class="section-title">🚀 Phase 2: Advanced DSA & Algorithms (Months 4-6)</h2>
+                <p class="phase-intro">Dynamic Programming, Greedy, Backtracking, Bit Manipulation, System Design Introduction</p>
+                
+                <div class="coming-soon">
+                    <span class="icon">🔨</span>
+                    <h3>Detailed tracking for Phase 2</h3>
+                    <p>This section will unlock after completing Phase 1</p>
+                </div>
+            </section>
+
+            <!-- Phase 3 Section (Months 7-9) -->
+            <section id="phase3" class="phase-section">
+                <h2 class="section-title">💪 Phase 3: Mastery & Interview Prep (Months 7-9)</h2>
+                <p class="phase-intro">Intensive Problem Solving, Mock Interviews, System Design Deep Dive, Company-Specific Prep</p>
+                
+                <div class="coming-soon">
+                    <span class="icon">🔒</span>
+                    <h3>Detailed tracking for Phase 3</h3>
+                    <p>This section will unlock after completing Phase 2</p>
+                </div>
+            </section>
+
+            <!-- Bonus Section (Months 10-12) -->
+            <section id="bonus" class="phase-section">
+                <h2 class="section-title">⭐ Bonus: Specialization (Months 10-12)</h2>
+                <p class="phase-intro">Backend Frameworks (FastAPI/Django), Distributed Systems, Microservices</p>
+                
+                <div class="coming-soon">
+                    <span class="icon">🎁</span>
+                    <h3>Advanced specialization tracks</h3>
+                    <p>This section will unlock after completing Phase 3</p>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="resources" class="phase-section">
+                <h2 class="section-title">📚 Resources & Study Materials</h2>
+                
+                <div class="resources-grid">
+                    <div class="resource-category">
+                        <h3>📖 Books</h3>
+                        <ul class="resource-list">
+                            <li>
+                                <strong>"Fluent Python"</strong> by Luciano Ramalho
+                                <span class="resource-tag">Python Mastery</span>
+                            </li>
+                            <li>
+                                <strong>"Grokking Algorithms"</strong> by Aditya Bhargava
+                                <span class="resource-tag">DSA Fundamentals</span>
+                            </li>
+                            <li>
+                                <strong>"System Design Interview"</strong> by Alex Xu
+                                <span class="resource-tag">System Design</span>
+                            </li>
+                            <li>
+                                <strong>"Designing Data-Intensive Applications"</strong> by Martin Kleppmann
+                                <span class="resource-tag">Backend/Distributed</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-category">
+                        <h3>🎥 Courses</h3>
+                        <ul class="resource-list">
+                            <li>
+                                <strong>NeetCode</strong> - LeetCode problem walkthroughs
+                                <span class="resource-tag">DSA Practice</span>
+                            </li>
+                            <li>
+                                <strong>AlgoExpert</strong> - Comprehensive DSA course
+                                <span class="resource-tag">Paid</span>
+                            </li>
+                            <li>
+                                <strong>Real Python</strong> - Advanced Python tutorials
+                                <span class="resource-tag">Python</span>
+                            </li>
+                            <li>
+                                <strong>Educative.io</strong> - System Design & DSA patterns
+                                <span class="resource-tag">Paid</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-category">
+                        <h3>💻 Practice Platforms</h3>
+                        <ul class="resource-list">
+                            <li>
+                                <strong>LeetCode</strong> - Primary problem-solving platform
+                                <span class="resource-tag">450+ problems</span>
+                            </li>
+                            <li>
+                                <strong>Pramp</strong> - Free peer mock interviews
+                                <span class="resource-tag">Interview Prep</span>
+                            </li>
+                            <li>
+                                <strong>interviewing.io</strong> - Mock interviews with engineers
+                                <span class="resource-tag">Paid</span>
+                            </li>
+                            <li>
+                                <strong>HackerRank</strong> - Additional practice
+                                <span class="resource-tag">Free</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-category">
+                        <h3>🔗 Useful Links</h3>
+                        <ul class="resource-list">
+                            <li>
+                                <strong>NeetCode Roadmap</strong>
+                                <a href="https://neetcode.io/roadmap" target="_blank">neetcode.io/roadmap</a>
+                            </li>
+                            <li>
+                                <strong>Blind 75</strong>
+                                <a href="https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU" target="_blank">Must-solve problems</a>
+                            </li>
+                            <li>
+                                <strong>Python Docs</strong>
+                                <a href="https://docs.python.org/3/" target="_blank">Official documentation</a>
+                            </li>
+                            <li>
+                                <strong>VisuAlgo</strong>
+                                <a href="https://visualgo.net" target="_blank">Algorithm visualizations</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="study-tips">
+                    <h3>💡 Study Tips & Best Practices</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <span class="tip-icon">⏰</span>
+                            <h4>Consistency > Intensity</h4>
+                            <p>2-3 hours daily beats 12 hours on weekends. Build sustainable habits.</p>
+                        </div>
+                        <div class="tip-card">
+                            <span class="tip-icon">📝</span>
+                            <h4>Document Everything</h4>
+                            <p>Keep a problem-solving journal. Write down patterns, mistakes, and insights.</p>
+                        </div>
+                        <div class="tip-card">
+                            <span class="tip-icon">🔄</span>
+                            <h4>Spaced Repetition</h4>
+                            <p>Review problems after 1 day, 1 week, 1 month. Solidifies understanding.</p>
+                        </div>
+                        <div class="tip-card">
+                            <span class="tip-icon">🗣️</span>
+                            <h4>Explain Out Loud</h4>
+                            <p>Verbalize your approach. If you can't explain it, you don't understand it.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Pure SDE Learning Tracker | Built with 🐍 Python in mind</p>
+            <p>Track your journey from beginner to interview-ready SDE</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
